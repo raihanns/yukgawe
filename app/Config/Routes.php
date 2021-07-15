@@ -39,6 +39,9 @@ $routes->get('create-db', function () {
 	}
 });
 
+
+$routes->get('login', 'auth::login');
+
 // $routes->get('/', 'Home::index');
 $routes->addRedirect('/', 'home');
 

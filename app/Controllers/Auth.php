@@ -11,6 +11,9 @@ class Auth extends BaseController
 
     public function login()
     {
+        if (session('id')) {
+            return redirect()->to(site_url('home'));
+        }
         return view('auth/login');
     }
 
@@ -33,5 +36,12 @@ class Auth extends BaseController
         } else {
             return redirect()->back()->with('error', 'Email tidak terdaftar.');
         }
+    }
+
+    public function logout()
+    {
+        session()->remove('id');
+        session()->remove('role_id');
+        return redirect()->to(site_url('login'));
     }
 }

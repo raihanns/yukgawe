@@ -1,14 +1,10 @@
 <?= $this->extend('layout/template'); ?>
 
-<?= $this->section('title'); ?>
-<title>Edit Menu | KKP</title>
-<?= $this->endSection(); ?>
-
 <?= $this->section('content'); ?>
 <section class="section">
     <div class="section-header">
         <div class="section-header-back">
-            <a href="<?= base_url('gawe'); ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
+            <a href="<?= base_url('menu'); ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
         </div>
         <h1>Menu Management</h1>
         <div class="section-header-breadcrumb">

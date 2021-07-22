@@ -11,8 +11,7 @@ class Menu extends BaseController
         $builder = $this->db->table('user_menu');
         $query   = $builder->get();
 
-        //cara 2: query manual
-        // $query = $this->db->query("SELECT * FROM gawe");
+        $data['title'] = 'Menu Management';
 
         $data['menu'] = $query->getResult();
         return view('menu/get', $data);
@@ -20,13 +19,16 @@ class Menu extends BaseController
 
     public function create()
     {
-        return view('menu/add');
+        $data['title'] = 'Menu Management';
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
+
+        return view('menu/add', $data);
     }
 
     public function store()
     {
+
         $data = $this->request->getPost();
-        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         $this->db->table('user_menu')->insert($data);
 
         if ($this->db->affectedRows() > 0) {
@@ -36,6 +38,7 @@ class Menu extends BaseController
 
     public function edit($id = null)
     {
+        $data['title'] = 'Menu Management';
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         if ($id != null) {
             $query = $this->db->table('user_menu')->getWhere(['id' => $id]);

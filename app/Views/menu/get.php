@@ -1,9 +1,5 @@
 <?= $this->extend('layout/template'); ?>
 
-<?= $this->section('title'); ?>
-<title>Menu | KKP</title>
-<?= $this->endSection(); ?>
-
 <?= $this->section('content'); ?>
 <section class="section">
     <div class="section-header">
@@ -60,6 +56,7 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>

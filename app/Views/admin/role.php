@@ -1,8 +1,6 @@
 <?= $this->extend('layout/template'); ?>
 
-<?= $this->section('title'); ?>
-<title>Role | KKP</title>
-<?= $this->endSection(); ?>
+
 
 <?= $this->section('content'); ?>
 <section class="section">

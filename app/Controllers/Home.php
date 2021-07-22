@@ -9,6 +9,7 @@ class Home extends BaseController
 	{
 		$data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
 
+		$data['title'] = 'Home';
 		return view('home', $data);
 	}
 

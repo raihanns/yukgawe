@@ -7,12 +7,13 @@ class User extends BaseController
     public function index()
     {
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
-
+        $data['title'] = 'My Profile';
         return view('user/index', $data);
     }
 
     public function edit($id = null)
     {
+        $data['title'] = 'Edit Profile';
         if ($id != null) {
             $query = $this->db->table('user')->getWhere(['id' => $id]);
             if ($query->resultID->num_rows > 0) {
@@ -40,6 +41,7 @@ class User extends BaseController
 
     public function changepassword()
     {
+        $data['title'] = 'Change Password';
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         return view('user/changepassword', $data);
     }

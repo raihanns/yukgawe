@@ -6,7 +6,7 @@ class Submenu extends BaseController
 {
     public function index()
     {
-
+        $data['title'] = 'SubMenu Management';
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         //join submenu dengan menu untuk mengambil nama menu
         $query = $this->db->query("
@@ -21,6 +21,7 @@ class Submenu extends BaseController
     public function create()
     {
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
+        $data['title'] = 'SubMenu Management';
         $builder = $this->db->table('user_menu');
         $query   = $builder->get();
 
@@ -40,6 +41,7 @@ class Submenu extends BaseController
 
     public function edit($id = null)
     {
+        $data['title'] = 'SubMenu Management';
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         if ($id != null) {
             $query = $this->db->table('user_sub_menu')->getWhere(['id' => $id]);

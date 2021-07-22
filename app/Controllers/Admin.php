@@ -17,21 +17,29 @@ class Admin extends BaseController
     public function index()
     {
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
+        $data['title'] = 'Dashboard';
+        return view('home', $data);
+    }
+
+    public function role()
+    {
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
 
         //cara 1: query builder
         $builder = $this->db->table('user_role');
         $query   = $builder->get();
 
-
-        //cara 2: query manual
-        // $query = $this->db->query("SELECT * FROM gawe");
-
+        $data['title'] = 'Role';
         $data['role'] = $query->getResult();
         return view('admin/role', $data);
     }
 
+
+
+
     public function role_access($id = null)
     {
+        $data['title'] = 'Role';
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
 
         $query = $this->db->table('user_role')->getWhere(['id' => $id]);

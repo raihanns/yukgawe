@@ -26,13 +26,6 @@ class Gawe extends BaseController
         //cara 1
         $data = $this->request->getPost();
 
-        //cara 2
-        // $data = [
-        //     'name_gawe' => $this->request->getVar('name_gawe'),
-        //     'date_gawe' => $this->request->getVar('date_gawe'),
-        //     'info_gawe' => $this->request->getVar('info_gawe'),
-        // ];
-
 
         $this->db->table('gawe')->insert($data);
 

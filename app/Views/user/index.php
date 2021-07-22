@@ -1,10 +1,5 @@
 <?= $this->extend('layout/template'); ?>
 
-<?= $this->section('title'); ?>
-<title>My Profile | KKP</title>
-<?= $this->endSection(); ?>
-
-
 <?= $this->section('content'); ?>
 <section class="section">
     <div class="section-header">

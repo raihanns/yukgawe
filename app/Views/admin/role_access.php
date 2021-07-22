@@ -1,14 +1,10 @@
 <?= $this->extend('layout/template'); ?>
 
-<?= $this->section('title'); ?>
-<title>Edit Role Access | KKP</title>
-<?= $this->endSection(); ?>
-
 <?= $this->section('content'); ?>
 <section class="section">
     <div class="section-header">
         <div class="section-header-back">
-            <a href="<?= base_url('gawe'); ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
+            <a href="<?= base_url('admin/role'); ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
         </div>
         <h1>Role Access</h1>
     </div>

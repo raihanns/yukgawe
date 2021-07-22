@@ -36,7 +36,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['kkp'];
 
 	/**
 	 * Constructor.
@@ -56,5 +56,8 @@ class BaseController extends Controller
 		// E.g.: $this->session = \Config\Services::session();
 
 		$this->db      = \Config\Database::connect();
+		$this->session = session();
+		// $db->table('user_access_menu')->getWhere(['role_id' => $role_id, 'menu_id' => $menu_id]);
+
 	}
 }

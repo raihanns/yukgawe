@@ -52,6 +52,8 @@ $routes->post('gawe/edit/(:num)', 'gawe::edit/$1');
 $routes->put('gawe/(:any)', 'gawe::update/$1');
 $routes->delete('gawe/(:segment)', 'gawe::destroy/$1');
 
+$routes->presenter('groups');
+
 //menu
 $routes->get('menu/add', 'menu::create');
 $routes->post('menu', 'menu::store');
@@ -65,6 +67,21 @@ $routes->post('submenu', 'submenu::store');
 $routes->post('submenu/edit/(:num)', 'submenu::edit/$1');
 $routes->put('submenu/(:any)', 'submenu::update/$1');
 $routes->delete('submenu/(:segment)', 'submenu::destroy/$1');
+
+//user
+// $routes->get('user/add', 'user::create');
+// $routes->post('user', 'user::store');
+$routes->post('user/edit/(:num)', 'user::edit/$1');
+$routes->put('user/(:any)', 'user::update/$1');
+// $routes->delete('user/(:segment)', 'user::destroy/$1');
+
+//admin
+// $routes->get('submenu/add', 'submenu::create');
+// $routes->post('submenu', 'submenu::store');
+$routes->post('admin/role_access/(:num)', 'admin::role_access/$1');
+// $routes->put('submenu/(:any)', 'submenu::update/$1');
+// $routes->delete('submenu/(:segment)', 'submenu::destroy/$1');
+
 
 /*
  * --------------------------------------------------------------------

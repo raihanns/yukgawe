@@ -6,6 +6,7 @@ class Menu extends BaseController
 {
     public function index()
     {
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         //cara 1: query builder
         $builder = $this->db->table('user_menu');
         $query   = $builder->get();
@@ -24,17 +25,8 @@ class Menu extends BaseController
 
     public function store()
     {
-        //cara 1
         $data = $this->request->getPost();
-
-        //cara 2
-        // $data = [
-        //     'name_gawe' => $this->request->getVar('name_gawe'),
-        //     'date_gawe' => $this->request->getVar('date_gawe'),
-        //     'info_gawe' => $this->request->getVar('info_gawe'),
-        // ];
-
-
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         $this->db->table('user_menu')->insert($data);
 
         if ($this->db->affectedRows() > 0) {
@@ -44,6 +36,7 @@ class Menu extends BaseController
 
     public function edit($id = null)
     {
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         if ($id != null) {
             $query = $this->db->table('user_menu')->getWhere(['id' => $id]);
             if ($query->resultID->num_rows > 0) {
@@ -59,6 +52,7 @@ class Menu extends BaseController
 
     public function update($id)
     {
+
         $data = $this->request->getPost();
         unset($data['_method']);
 

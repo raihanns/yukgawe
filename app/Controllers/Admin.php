@@ -2,22 +2,73 @@
 
 namespace App\Controllers;
 
-class Gawe extends BaseController
+class Admin extends BaseController
 {
+
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    //     $query = $this->db->table('user')->getWhere(['id' => session('id')]);
+    //     $data['user'] = $query->getRow();
+    // }
+
+
+
     public function index()
     {
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
+
         //cara 1: query builder
-        $builder = $this->db->table('gawe');
+        $builder = $this->db->table('user_role');
         $query   = $builder->get();
 
+
+        //cara 2: query manual
+        // $query = $this->db->query("SELECT * FROM gawe");
+
+        $data['role'] = $query->getResult();
+        return view('admin/role', $data);
+    }
+
+    public function role_access($id = null)
+    {
         $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
-        $data['gawe'] = $query->getResult();
-        return view('gawe/get', $data);
+
+        $query = $this->db->table('user_role')->getWhere(['id' => $id]);
+        $data['role'] = $query->getRow();
+        $data['menu'] = $this->db->table('user_menu')->get()->getResult();
+        return view('admin/role_access', $data);
+    }
+
+    public function changeAccess()
+    {
+
+        // $menu_id = $this->input->post('menuId');
+        $menu_id = $this->request->getPost('menuId');
+        $role_id = $this->request->getPost('roleId');
+
+        // $role_id = $this->input->post('roleId');
+
+
+        $data = [
+            'role_id' => $role_id,
+            'menu_id' => $menu_id
+
+        ];
+        $result = $this->db->table('user_access_menu')->getWhere(['role_id' => $role_id, 'menu_id' => $menu_id]);
+        // $result = $this->db->table('user_access_menu')->getWhere($data);
+        // $result = $this->db->get_where('user_access_menu', $data);
+
+        if ($result->resultID->num_rows < 1) {
+            $this->db->table('user_access_menu')->insert($data);
+        } else {
+            $this->db->table('user_access_menu')->delete($data);
+        }
+        $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Access changed!</div>');
     }
 
     public function create()
     {
-        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         return view('gawe/add');
     }
 
@@ -43,7 +94,6 @@ class Gawe extends BaseController
 
     public function edit($id = null)
     {
-        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         if ($id != null) {
             $query = $this->db->table('gawe')->getWhere(['id_gawe' => $id]);
             if ($query->resultID->num_rows > 0) {

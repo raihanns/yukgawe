@@ -32,16 +32,13 @@
                 <ul class="navbar-nav navbar-right">
 
                     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="<?= base_url(); ?>/template/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, RaihanNS</div>
+                            <img alt="image" src="<?= base_url('template/assets/img/avatar'); ?>/<?= $user->image; ?>" class="rounded-circle mr-1">
+                            <div class="d-sm-none d-lg-inline-block"><?= $user->name; ?></div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="features-profile.html" class="dropdown-item has-icon">
+                            <a href="<?= base_url('user'); ?>" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
-                            </a>
-                            <a href="features-settings.html" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Settings
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="<?= base_url('auth/logout'); ?>" class="dropdown-item has-icon text-danger">
@@ -103,7 +100,29 @@
     <script src="<?= base_url(); ?>/template/assets/js/scripts.js"></script>
     <script src="<?= base_url(); ?>/template/assets/js/custom.js"></script>
 
-    <!-- Page Specific JS File -->
+    <script>
+        $('.custom-file-input').on('change', function() {
+            let fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        })
+        $('.form-check-input').on('click', function() {
+            const menuId = $(this).data('menu');
+            const roleId = $(this).data('role');
+
+
+            $.ajax({
+                url: "<?= base_url('admin/changeAccess'); ?>",
+                type: 'post',
+                data: {
+                    menuId: menuId,
+                    roleId: roleId
+                },
+                success: function() {
+                    document.location.href = "<?= base_url('admin/role_access/'); ?>" + roleId;
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

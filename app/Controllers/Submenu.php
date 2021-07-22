@@ -7,11 +7,7 @@ class Submenu extends BaseController
     public function index()
     {
 
-        // $builder = $this->db->table('user_sub_menu');
-        // $query   = $builder->get();
-
-
-
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         //join submenu dengan menu untuk mengambil nama menu
         $query = $this->db->query("
                 SELECT `user_sub_menu`.*, `user_menu`.`menu`
@@ -19,12 +15,12 @@ class Submenu extends BaseController
                 ON `user_sub_menu`.`menu_id` = `user_menu`.`id`
         ");
         $data['submenu'] = $query->getResult();
-
         return view('submenu/get', $data);
     }
 
     public function create()
     {
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         $builder = $this->db->table('user_menu');
         $query   = $builder->get();
 
@@ -34,7 +30,6 @@ class Submenu extends BaseController
 
     public function store()
     {
-
         $data = $this->request->getPost();
         $this->db->table('user_sub_menu')->insert($data);
 
@@ -45,6 +40,7 @@ class Submenu extends BaseController
 
     public function edit($id = null)
     {
+        $data['user'] = $this->db->table('user')->getWhere(['id' => session('id')])->getRow();
         if ($id != null) {
             $query = $this->db->table('user_sub_menu')->getWhere(['id' => $id]);
 
@@ -72,6 +68,7 @@ class Submenu extends BaseController
 
     public function update($id)
     {
+
         $data = $this->request->getPost();
         unset($data['_method']);
 
